@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Register: React.FC = () => {
   const [name, setName] = useState('');
@@ -7,12 +8,15 @@ const Register: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false); // <- NEW
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setSuccess('');
+    setLoading(true); // <- START LOADING
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
@@ -30,9 +34,12 @@ const Register: React.FC = () => {
       }
 
       setSuccess('Registration successful! You can now log in.');
-      setTimeout(() => navigate('/login'), 2000); 
+      register({ ...data?.user?.original, token: data?.authorization?.token });
+
     } catch (err: any) {
       setError(err.message || 'Something went wrong');
+    } finally {
+      setLoading(false); // <- END LOADING
     }
   };
 
@@ -58,6 +65,7 @@ const Register: React.FC = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  disabled={loading}
                 />
               </div>
 
@@ -70,6 +78,7 @@ const Register: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={loading}
                 />
               </div>
 
@@ -83,11 +92,19 @@ const Register: React.FC = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   minLength={6}
+                  disabled={loading}
                 />
               </div>
 
-              <button type="submit" className="btn primary-button bck-light-dark w-100">
-                Register
+              <button
+                type="submit"
+                className="btn primary-button bck-light-dark w-100"
+                disabled={loading}
+              >
+                {loading ? (
+                  <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                ) : null}
+                {loading ? "Registering..." : "Register"}
               </button>
             </form>
 

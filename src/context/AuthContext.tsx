@@ -1,42 +1,70 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 
 type User = {
   email: string;
+  name: string;
+  token: string
 };
 
 type AuthContextType = {
   user: User | null;
+  token: string | null;
   isAuthenticated: boolean;
   login: (user: User) => void;
   logout: () => void;
+  register: (user: User) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
+      setToken(storedToken);
     }
   }, []);
 
   const login = (userData: User) => {
     setUser(userData);
+    setToken(userData.token);
+    console.log(userData)
     localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("token", userData.token);
+    navigate('/')
+
+  };
+
+  const register = (userData: User) => {
+    console.log(userData)
+
+    setUser(userData);
+   
+    setToken(userData.token);
+    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("token", userData.token);
+    navigate('/')
   };
 
   const logout = () => {
     setUser(null);
+    setToken(null);
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
   const isAuthenticated = !!user;
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ user, token, isAuthenticated, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, FormEvent } from "react";
 
 import Summery from "./Summery";
-// import Uploader from "./Uploader";
 import UploaderLoader from "./UploaderLoader";
 import FileUploader from "./Uploader";
 import thinking from "../../assets/images/thinking.png";
 
 import "../../assets/styles/uploader.css";
+import { useAuth } from "../../context/AuthContext"; 
 
 type FileType = "video" | "audio" | null;
 
@@ -18,6 +18,7 @@ const UploaderWrapper: React.FC = () => {
   const [data, setData] = useState(null);
   const [step, setStep] = useState<"uploading" | "summarizing">("uploading");
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const { token } = useAuth(); // <-- Get token from context
 
   useEffect(() => {
     if (loading) {
@@ -44,10 +45,13 @@ const UploaderWrapper: React.FC = () => {
     formData.append("file", file);
 
     try {
+      console.log(token ? { Authorization: `Bearer ${token}` } : {})
       const response = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
         method: "POST",
         body: formData,
+        headers: token ? { Authorization: `Bearer ${token}` } : {}, // <-- Add token if available
       });
+
       if (!response.ok) throw new Error("Upload failed");
 
       const data = await response.json();
@@ -57,6 +61,7 @@ const UploaderWrapper: React.FC = () => {
     } catch (error) {
       console.error("Upload error:", error);
       alert("File upload failed.");
+      setLoading(false); // Also stop loading on error
     }
   };
 
@@ -77,8 +82,6 @@ const UploaderWrapper: React.FC = () => {
         ) : (
           <Summery data={data} />
         )}
-
-        {/* Replace this with UploadResult when you're ready */}
 
         <div className="img-abs-fr">
           <img src={thinking} width={260} height={260} />
