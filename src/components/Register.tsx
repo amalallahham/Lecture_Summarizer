@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Register: React.FC = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false); // <- NEW
   const navigate = useNavigate();
   const { register } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
-    setLoading(true); // <- START LOADING
+    setError("");
+    setSuccess("");
+    setLoading(true);
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, email, password }),
       });
@@ -30,14 +30,12 @@ const Register: React.FC = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
+        throw new Error(data.message || "Registration failed");
       }
-
-      setSuccess('Registration successful! You can now log in.');
+      setSuccess("Registration successful! You can now log in.");
       register({ ...data?.user?.original, token: data?.authorization?.token });
-
     } catch (err: any) {
-      setError(err.message || 'Something went wrong');
+      setError(err.message || "Something went wrong");
     } finally {
       setLoading(false); // <- END LOADING
     }
@@ -57,7 +55,9 @@ const Register: React.FC = () => {
 
             <form onSubmit={handleSubmit} className="my-3">
               <div className="mb-3">
-                <label htmlFor="name" className="form-label">Name</label>
+                <label htmlFor="name" className="form-label">
+                  Name
+                </label>
                 <input
                   type="text"
                   className="form-control"
@@ -70,7 +70,9 @@ const Register: React.FC = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
+                <label htmlFor="email" className="form-label">
+                  Email
+                </label>
                 <input
                   type="email"
                   className="form-control"
@@ -83,7 +85,9 @@ const Register: React.FC = () => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="password" className="form-label">Password</label>
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
                 <input
                   type="password"
                   className="form-control"
@@ -102,14 +106,21 @@ const Register: React.FC = () => {
                 disabled={loading}
               >
                 {loading ? (
-                  <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
                 ) : null}
                 {loading ? "Registering..." : "Register"}
               </button>
             </form>
 
             <p className="mt-3 text-center">
-              Already have an account? <a href="/login" className='text-white'>Login here</a>
+              Already have an account?{" "}
+              <a href="/login" className="text-white">
+                Login here
+              </a>
             </p>
           </div>
         </div>
