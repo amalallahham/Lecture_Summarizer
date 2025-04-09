@@ -56,8 +56,32 @@ const UploaderWrapper: React.FC = () => {
 
       const data = await response.json();
       console.log("Upload success:", data);
+      setData(data); // for UI display
+
+      // ✅ Save the summary to DB
+      if (data?.summary && token) {
+        const saveRes = await fetch(`${import.meta.env.VITE_API_URL}/summaries`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            title: file.name,
+            summary_text: data.summary,
+          }),
+        });
+  
+        if (!saveRes.ok) {
+          const errData = await saveRes.json();
+          console.warn("Failed to save summary:", errData);
+        }
+      }
+  
       setLoading(false);
-      setData(data);
+
+
+
     } catch (error) {
       console.error("Upload error:", error);
       alert("File upload failed.");
