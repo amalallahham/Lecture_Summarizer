@@ -1,69 +1,54 @@
+@font-face {
+  font-family: "regular";
+  src: url("../src/assets/fonts/Modelica/BwModelica-Regular.otf") format("truetype");
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --primary: rgb(37, 140, 92);
+  --dark: #282929
 
-  color-scheme: light dark;
-  background-color: #ffffff; /* LIGHT like Laravel */
-  color: #000000;
-
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+html, body {
+  margin: 0px;
+  padding: 0px;
+  width: 100vw;
+  height: 100%;
+  scroll-behavior: smooth;
+  font-family: regular !important;
+  color: #fff !important;
+  background-color: #1d1e1e !important;
+  font-size: 16px;
+  overflow-x: hidden;
+
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #ffffff; /* match your layout bg */
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+.primary-button {
+  color: white !important;
+  background-color: var(--primary) !important;
+  border-radius: 20px !important;
+  padding: .5rem 1rem !important;
+  font-family: 16px !important;
+  border: none;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.primary-bck {
+  background-color: var(--primary) !important;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.dark-bck {
+  background-color: var(--dark) !important;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.color-primary {
+  color: var(--primary) !important;
+}
+
+.font-size-30px {
+  font-size: 30px;
+}
+
+.bck-light-dark {
+  background-color: #282929 !important;
 }

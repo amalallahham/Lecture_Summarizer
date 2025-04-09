@@ -1,0 +1,17 @@
+ul {
+    text-align: justify !important;
+}
+
+h2 {
+    font-family: extraBold !important;
+}
+
+.center-abs {
+    display: flex
+;
+    /* align-items: ; */
+    justify-content: center;
+    min-height: 450px;
+    flex-direction: column;
+    padding: 2rem;
+}

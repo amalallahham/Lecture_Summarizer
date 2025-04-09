@@ -1,0 +1,86 @@
+/* Make drop zone visually distinct and interactive */
+.drop-zone {
+  transition: background-color 0.3s, border-color 0.3s;
+  cursor: pointer;
+}
+
+/* The dashed container styling */
+.dashed {
+  border: 3px dashed #fac30c;
+  border-radius: 20px;
+  background-color: #282929;
+  color: #ffffff;
+  min-height: 450px;
+}
+
+/* When dragging over */
+.drop-zone.drag-active {
+  background-color: #3b3b3b;
+  border-color: #ffd100;
+}
+
+/* Icon style */
+.icon-color {
+  color: #fac30c;
+  fill: #fac30c !important;
+  font-size: 60px;
+}
+
+/* Upload button */
+.choose-file-btn {
+  background: linear-gradient(140deg, #fff95b, #ff930f);
+  color: #000;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  border-radius: 20px !important;
+  font-family: 17px !important;
+}
+
+.choose-file-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 145, 0, 0.5);
+}
+
+/* Upload submit button */
+.upload-submit-btn {
+  background-color: #fac30c;
+  border: none;
+  color: #000;
+  font-weight: bold;
+}
+
+.upload-submit-btn:disabled {
+  background-color: #888;
+  color: #eee;
+  cursor: not-allowed;
+}
+
+.min-width {
+  min-width: 20%;
+}
+
+.img-abs-fr {
+  position: absolute;
+  bottom: -20px;
+  right: 0;
+  margin-right: -4.5rem;
+}
+
+.center-abs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 450px;
+  flex-direction: column;
+}
+
+
+.font-size-20px {
+  font-size: 20px;
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, #ead593, #ff930f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

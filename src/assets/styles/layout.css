@@ -1,0 +1,14 @@
+.button-auth {
+  color: white !important;
+  border-radius: 20px !important;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.button-auth:hover {
+  border: 1px solid black !important;
+}
+
+.font-size-30 {
+  font-size: 30px;
+}

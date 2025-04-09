@@ -1,49 +1,95 @@
-import React from 'react';
-import './Layout.css'; // Optional if you want to extract styles
+import React from "react";
+import graduation from "../assets/images/froggygraduation.png";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import "../assets/styles/layout.css";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = () => {
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
-    <div className="layout-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div>
       {/* Navbar */}
-      <header style={{
-        backgroundColor: '#247B7B',
-        padding: '1rem 2rem',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        color: 'white',
-      }}>
-        <h1 style={{ margin: 0 }}>PHP Project</h1>
-        <nav style={{ display: 'flex', gap: '1rem' }}>
-          <a href="/" style={{ color: 'white', textDecoration: 'none' }}>Home</a>
-          <a href="/features" style={{ color: 'white', textDecoration: 'none' }}>Features</a>
-          <a href="/about" style={{ color: 'white', textDecoration: 'none' }}>About</a>
-          <a href="/faq" style={{ color: 'white', textDecoration: 'none' }}>FAQ</a>
+      <header>
+        <nav className="navbar navbar-expand-lg  navbar-dark px-5 py-3">
+          <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
+            <img src={graduation} width={80} height={80} alt="Logo" />
+            <span className="extraBold font-size-30">NoteZilla</span>
+          </Link>
+
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav me-auto">
+              {isAuthenticated && (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/summery">
+                      Your Summaries
+                    </Link>
+                  </li>
+                </>
+              )}
+            </ul>
+
+            <ul className="navbar-nav">
+              {isAuthenticated ? (
+                <li className="nav-item">
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              ) : (
+                <>
+                  <li className="nav-item me-2">
+                    <Link
+                      className="btn button-auth primary-bck bold py-2 px-4"
+                      to="/login"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="btn button-auth dark-bck color-primary bold py-2 px-4"
+                      to="/register"
+                    >
+                      Register
+                    </Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
         </nav>
       </header>
 
       {/* Main content */}
-      <main style={{
-        backgroundColor: '#3DB6B6',
-        flex: 1,
-        padding: '4rem 2rem',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'start'
-      }}>
-        <div style={{ width: '100%', maxWidth: '900px' }}>
-  {children}
-</div>
+      <main className="container cont">
+        <Outlet />
       </main>
 
       {/* Footer */}
-      <footer style={{
-        backgroundColor: '#247B7B',
-        color: 'white',
-        textAlign: 'center',
-        padding: '0.75rem',
-        fontSize: '0.9rem'
-      }}>
+      <footer className="text-center py-4 border-top">
         © Amal, Dina, James, Joey
       </footer>
     </div>

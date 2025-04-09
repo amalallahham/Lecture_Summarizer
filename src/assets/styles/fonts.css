@@ -1,0 +1,65 @@
+@font-face {
+  font-family: "regular";
+  src: url("../fonts/Modelica/BwModelica-Regular.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "bold";
+  src: url("../fonts/Modelica/BwModelica-Bold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "boldItalic";
+  src: url("../fonts/Modelica/BwModelica-BoldItalic.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "light";
+  src: url("../fonts/Modelica/BwModelica-Light.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "medium";
+  src: url("../fonts/Modelica/BwModelica-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "extraBold";
+  src: url("../fonts/Modelica/BwModelica-ExtraBold.otf") format("truetype");
+}
+
+/* === Font Classes === */
+
+.regular {
+  font-family: "regular", sans-serif !important;
+}
+
+.italic {
+  font-family: "italic", sans-serif !important;
+}
+
+.bold {
+  font-family: "bold", sans-serif !important;
+}
+
+.light {
+  font-family: "light", sans-serif !important;
+}
+
+.medium {
+  font-family: "medium", sans-serif !important;
+}
+
+.extraBold {
+  font-family: "extraBold", sans-serif !important;
+}
+
+/* Default font on body */
+:root {
+  font-family: "regular", sans-serif;
+}
+
+html,
+body {
+  font-family: "regular", sans-serif;
+}
