@@ -23,14 +23,17 @@ const Register: React.FC = () => {
         body: JSON.stringify({ name, email, password }),
       });
 
-      const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.message || 'Registration failed');
-      }
+      console.log(response);
 
-      setSuccess('Registration successful! You can now log in.');
-      setTimeout(() => navigate('/login'), 2000); 
+      // const data = await response.json();
+
+      // if (!response.ok) {
+      //   throw new Error(data.message || 'Registration failed');
+      // }
+
+      // setSuccess('Registration successful! You can now log in.');
+      // setTimeout(() => navigate('/login'), 2000);
     } catch (err: any) {
       setError(err.message || 'Something went wrong');
     }
