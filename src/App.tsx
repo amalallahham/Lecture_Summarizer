@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Summery from "./components/uploader/Summery";
 import UploaderWrapper from "./components/uploader/UploaderWrapper";
+import SummeryList from "./components/SummeryList";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<UploaderWrapper />} />
-        <Route path="/summery" element={<Summery />} />
+        <Route path="/summeryList" element={<SummeryList />} />
       </Route>
     </Routes>
     </>

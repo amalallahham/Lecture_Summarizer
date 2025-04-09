@@ -29,7 +29,7 @@ const Login: React.FC = () => {
       }
   
       login({ email: data.email }); // or data.user if your API returns a user object
-      navigate('/dashboard');
+      navigate('/summeryList');
     } catch (err: any) {
       setError(err.message);
     }
