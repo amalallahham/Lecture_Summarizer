@@ -29,8 +29,8 @@ const Login: React.FC = () => {
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
       }
+      login({ ...data?.user, token: data?.authorization?.token });
 
-      login({ ...data?.user?.original, token: data?.authorization?.token });
       navigate("/");
     } catch (err: any) {
       setError(err.message);

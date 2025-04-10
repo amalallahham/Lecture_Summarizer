@@ -56,8 +56,10 @@ const UploaderWrapper: React.FC = () => {
 
       const data = await response.json();
       console.log("Upload success:", data);
+      setData(data); // for UI display
+  
       setLoading(false);
-      setData(data);
+
     } catch (error) {
       console.error("Upload error:", error);
       alert("File upload failed.");
