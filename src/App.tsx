@@ -16,7 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<UploaderWrapper />} />
-        <Route path="/summeryList" element={<SummeryList />} />
+        <Route path="/summery" element={<SummeryList />} />
       </Route>
     </Routes>
     </>
