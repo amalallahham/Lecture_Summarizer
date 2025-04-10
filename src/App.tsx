@@ -17,7 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<UploaderWrapper />} />
         {/* <Route path="/summeryList" element={<SummeryList />} /> */}
-        <Route path="/your-summaries" element={<SummeryList />} />
+        <Route path="/summaries" element={<SummeryList />} />
         <Route path="*" element={<UploaderWrapper />} />
 
         </Route>

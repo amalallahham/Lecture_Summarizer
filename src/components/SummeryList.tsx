@@ -22,10 +22,12 @@ const SummeryList: React.FC = () => {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
+            "Accept": "application/json",
           },
         });
 
         const data = await response.json();
+        console.log("RAW RESPONSE FROM API:", data); 
 
         if (!response.ok) {
           throw new Error(data.message || "Failed to fetch summaries");
@@ -33,6 +35,7 @@ const SummeryList: React.FC = () => {
 
         setSummaries(data);
       } catch (err: any) {
+        console.error("FETCH ERROR:", err);
         setError(err.message || "Something went wrong");
       } finally {
         setLoading(false);

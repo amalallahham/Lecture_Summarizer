@@ -40,7 +40,7 @@ const Layout = () => {
               {isAuthenticated && (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/your-summaries">
+                    <Link className="nav-link" to="/summaries">
                       Your Summaries
                     </Link>
                   </li>
